@@ -1,0 +1,14 @@
+paste stuuf like this into the XUL :
+
+
+<toolbox>
+  <menubar id="options-menubar">
+    <menu id="options_menu" label="Options">
+      <menupopup>
+        <menuitem id="backups" label="Make Backups" type="checkbox"/>
+        <menuitem id="email" label="Email Administrator" type="checkbox" checked="true"/>
+      </menupopup>
+    </menu>
+  </menubar>
+</toolbox>
+
