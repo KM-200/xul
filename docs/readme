@@ -2,7 +2,7 @@ find snippets here : https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/T
 
 example : https://km-200.github.io/xul/findfile_events.xul
 
-paste stuff like this into the XUL after the "label" line:
+works with "firefox ESR" and waterfox  too. paste stuff like this into the XUL after the "label" line:
 
 
 <toolbox>
