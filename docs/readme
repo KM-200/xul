@@ -12,3 +12,20 @@ paste stuff like this into the XUL after the "label" line:
   </menubar>
 </toolbox>
 
+
+or
+
+
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<window id="example-window" title="Example 6.1.1"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<button label="OK" oncommand="alert('Button was pressed!');"/>
+
+
+</window>
+
+
