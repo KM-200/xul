@@ -8,4 +8,4 @@ test right here :  https://km-200.github.io/xul/index.xul
 
 this is a fork of : http://ted.mielczarek.org/code/mozilla/xuledit/xuledit.xul
 
-http://ted.mielczarek.org/code/mozilla
+all credits to : http://ted.mielczarek.org/code/mozilla
