@@ -1,8 +1,8 @@
-intro to XUL: https://km-200.github.io/xul/xul.html
+intro to XUL: https://km-200.github.io/xul/2/xul.html
 
 find snippets here : https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/Tutorial/Adding_Event_Handlers
 
-example : https://km-200.github.io/xul/findfile_events.xul
+example : https://km-200.github.io/xul/2/findfile_events.xul
 
 works with "firefox ESR" and waterfox  too. paste stuff like this into the XUL after the "label" line:
 
