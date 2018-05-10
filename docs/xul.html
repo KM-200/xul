@@ -1,0 +1,565 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 5.1.6.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="2018-05-10T16:44:55.777423068"/>
+	<meta name="" content=""/>
+	<style type="text/css">
+		h2.cjk { font-family: "WenQuanYi Micro Hei" }
+		h2.ctl { font-family: "Lohit Devanagari" }
+		pre.cjk { font-family: "Courier New", monospace }
+		h4.cjk { font-family: "WenQuanYi Micro Hei" }
+		h4.ctl { font-family: "Lohit Devanagari" }
+		tt.cjk { font-family: "Courier New", monospace }
+	</style>
+</head>
+<body lang="en-US" dir="ltr">
+<h1>An Introductory Tour of Mozilla's <br/>
+XUL file format
+(window.xml , file.xul)</h1>
+<div id="articleHeader" dir="ltr">
+	<p><font color="#000080"><a href="http://www.informit.com/authors/bio/0c43b9e5-a2e1-4108-8884-9a36d3a6ed0b">
+  <font color="#000080">
+    <img src="data:image/jpeg;base64,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" name="Image1" alt="Nigel McFarlane" align="bottom" width="51" height="51" border="1"/>
+  </font>
+</a>
+<a href="http://www.informit.com/authors/bio/0c43b9e5-a2e1-4108-8884-9a36d3a6ed0b">
+	</a></font>
+	</p>
+	<ul>
+		<li/>
+<p style="margin-bottom: 0in">By <a href="http://www.informit.com/authors/bio/0c43b9e5-a2e1-4108-8884-9a36d3a6ed0b">Nigel
+		McFarlane</a> &amp; others</p>
+		<li/>
+<p>Nov 21, 2003 and 2018</p>
+	</ul>
+</div>
+<p>Back in the 2000’s writing utopic pep talks about XUL was all
+the rage. A few years later when the dot.com crisis hit the planet,
+all those unproductive, unmaintained websites about XUL etc. fell in
+disrepair and never recovered from bitrot ever since. Using XUL is
+still poss in 2018 but mostly a waste of time. This online editor
+allows you to take a shot before you get to do sth. That actually
+makes sense  in contrast. XUL is only being used by firefox and
+Mozilla, so it is useless within Mac-Browsers etc..</p>
+<p>Like all webwarez, XUL is pretty chaotic and broken. Nobody used
+it after 2005. All links you can google are dead. Some <b>Window.xul</b>
+fiel may work in firefox now and open and display, but in a few
+months’ time, everything will be 100% broken, as always with
+webwarez. There are gazillions of variants and versions, each of
+which is worse than the other. People who describe XUL usually don’t
+know what they are talking about.<br/>
+<br/>
+Developing web
+applications, but fed up with bending HTML? Too busy to learn .NET?
+<br/>
+Be cool, use XUL (pronounced &quot;zool&quot;) – and have
+nobody use your stuff !</p>
+<h2 class="western">Introduction</h2>
+<p><i>XUL</i> is an XML-based technology for expressing the GUI part
+of a software application. It has been used to express GUIs for
+applications as diverse as web browsers, email clients, calendars,
+calculators, spreadsheet editors, HTML editors, debuggers, and whole
+desktop environments – but no one uses it these days. <br/>
+<br/>
+The
+free Mozilla platform—that is, the executable engine and libraries
+that accompany every Mozilla-based product—provides a
+fully-featured implementation of XUL. This article is a quick look at
+the main tags that Mozilla's XUL provides. <i>Mozilla</i> / <i>firefox</i>
+is also the name of the application that picked up where Netscape's
+products have stopped in prehistoric times. 
+</p>
+<p><b>TIP – <br/>
+</b>When dealing with technical people, pronounce
+<i>XUL</i> the cool way: &quot;zool.&quot; <br/>
+When dealing with
+humorless technophobes, pronounce the individual letters: &quot;eks
+you ell.&quot; <br/>
+XUL is both funky and dignified.</p>
+<h2 class="western">XUL is XML</h2>
+<p>Simplicity is a chief attraction of XML(complete bull, itz
+difficult , complex and chaotic). When a suitable set of tags are
+available for a given problem domain, solutions in that domain can be
+expressed very neatly or not. For example, in the Structured Vector
+Graphics (SVG) XML application, a programmer can specify a circle
+simply with the <tt class="western">&lt;circle&gt;</tt> tag. So what
+?</p>
+<p>XUL provides the same “simplicity” (LOL) for GUIs, but there
+is <b>no GUI-bilder</b> like Qt-Designer is almost one.: To create a
+scrollbar, use <tt class="western">&lt;scrollbar&gt;</tt>. <br/>
+<br/>
+XUL
+was invented by Netscape and now is stewarded by the <a href="http://mozilla.org/" target="new">Mozilla
+Foundation</a>. XUL is not a standard of the World Wide Web
+Consortium (<a href="http://www.w3.org/" target="new">W3C</a>), but
+it assumes some W3C standards in its design. All XUL documents, for
+instance, are valid XML and support XML Namespace, DTD, and CSS2
+syntax, as well as JavaScript. The XUL tag set is a <i>de facto</i>
+standard that has grown organically out of the practical needs of
+real software development projects. Just like HTML, XUL documents can
+be downloaded across the Internet and displayed locally. They can
+also be installed locally if required. XUL doesn't have a URL that
+contains a definition of all the existing tags—this fake URL is
+used instead:</p>
+<pre class="western" style="margin-bottom: 0.2in">&lt;window xmlns=&quot;http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul&quot;&gt;</pre><p>
+<tt class="western">&lt;window&gt;</tt> is XUL's equivalent of HTML's
+<tt class="western">&lt;html&gt;</tt> tag - which seems a stupid
+“solution” to begin with.</p>
+<p>Before XML, expressing a software GUI required either a &quot;canned&quot;
+approach, in which a GUI design tool – the <b>famous GUI builders</b>
+like Borland Delphi - does all the work for you, or a heap of code
+written in some tedious chaotic programming language, which takes 50
+times as much effort and time to do.<br/>
+<br/>
+XUL uses neither of
+these strategies. Instead, each widget in the GUI is declared with
+one or more XUL tags, a strategy identical to that of HTML. For GUIs,
+this is an efficient and groundbreaking way to do software
+development. XUL is also designed so the same code will work across
+all platforms. Thus, your XUL document will display correctly on
+Microsoft Windows, Macintosh, and Linux <b>or not.</b></p>
+<p>The Mozilla platform and products derived from it, such as AOL for
+the Macintosh, Oeone's HomeBase, and Netscape (which no one uses),
+can all display XUL content or not. This was true in 2003 , in 2018
+it was of course dropped and one must use “<b>firefox ESR” (or
+waterfox, seamonkey, pale moon etc.) plus some add-ons (“remote XUL
+manager”) </b>to be able to use XUL. So much for compatibility.
+Complete <b>breakage</b> of all XUL in firefox is the reality !</p>
+<p>The platform can do this directly, without the use of any
+additional application – so what?. For example, Figures 1 and 2
+show an ordinary XHTML page displayed first inside a Mozilla browser
+window (<a href="javascript:popUp('/content/images/art_mcfarlane1_xulintro/elementLinks/fig01.gif')">Figure
+1</a>), and secondly all by itself (<a href="javascript:popUp('/content/images/art_mcfarlane1_xulintro/elementLinks/fig02.gif')">Figure
+2</a>).</p>
+<p><a href="javascript:popUp('/content/images/art_mcfarlane1_xulintro/elementLinks/fig01.gif')">
+  <img src="data:image/png;base64,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" name="Image2" alt="Figure 1" align="left" hspace="5" width="100" height="75" border="0"/>
+</a>
+<b><a href="javascript:popUp('/content/images/art_mcfarlane1_xulintro/elementLinks/fig01.gif')">Figure
+1</a> XHTML page displayed in a browser.</b></p>
+<p><a href="javascript:popUp('/content/images/art_mcfarlane1_xulintro/elementLinks/fig02.gif')">
+  <img src="data:image/png;base64,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" name="Image3" alt="Figure 2" align="left" hspace="5" width="100" height="75" border="0"/>
+</a>
+<b><a href="javascript:popUp('/content/images/art_mcfarlane1_xulintro/elementLinks/fig02.gif')">Figure
+2</a> XHTML page displayed in a raw Mozilla window.</b></p>
+<p>The second window displays a pure XHTML document; <br/>
+<br/>
+the
+first window is a normal browser window that consists of XUL plus the
+displayed XHTML. The browser menus, scrollbars, and buttons are made
+up of one or more XUL documents. Those buttons don't come from
+compiled code, and they're not somehow &quot;special.&quot; They're
+just XUL tags made visible.</p>
+<p>To display an XHTML, XUL, or XML document by itself, just use
+Mozilla's <tt class="western">-chrome</tt> command-line option. For
+example, on Microsoft Windows, try this from the directory in which
+Mozilla is installed:</p>
+<pre class="western" style="margin-bottom: 0.2in">firefox -chrome “http://www.yahoo.com/index.html”</pre><p>
+this of course <b>breaks</b> with: Firefox can’t find the file at
+/home/YOU/“<a href="http://www.yahoo.com/index.html">http://www.yahoo.com/index.html</a>”
+but you catch my drift. The <tt class="western">-chrome</tt> option
+leaves out the standard XUL content that provides the browser part of
+every browser window. Such a window can also be created from
+JavaScript if this call is placed inside a document that has some
+security restrictions removed:</p>
+<pre class="western" style="margin-bottom: 0.2in">window.open(URL, &quot;_blank&quot;, &quot;chrome=true&quot;);</pre><p>
+Instead of leaving the XUL out, you can leave the XHTML out. A
+displayed window is then pure XUL, with no HTML. That window can be
+the basis of a whole application GUI, or of a humble dialog box. When
+you do that, you're stepping away from the HTML-centric style that
+lies behind most current web-based application development. 
+</p>
+<p style="page-break-before: always">For example, the Bookmark
+Manager window is written entirely in XUL (see <a href="javascript:popUp('/content/images/art_mcfarlane1_xulintro/elementLinks/fig03.gif')">Figure
+3</a>).</p>
+<p><a href="javascript:popUp('/content/images/art_mcfarlane1_xulintro/elementLinks/fig03.gif')">
+  <img src="data:image/png;base64,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" name="Image4" alt="Figure 3" align="left" hspace="5" width="100" height="75" border="0"/>
+</a>
+<b><a href="javascript:popUp('/content/images/art_mcfarlane1_xulintro/elementLinks/fig03.gif')">Figure
+3</a> Mozilla's Bookmark Manager is written in XUL.</b></p>
+<p>No 3GL code is required, although a drop of scripting goes a long
+way. This kind of window lets you break into the world of real
+application development. Time-efficient web-based skills can be
+applied to the world of real applications—you don't have to learn
+C++ or even Visual Basic. It's all XML in the end. This is complete
+bull.</p>
+<h2 class="western">XUL Does Easily What XHTML Does Clumsily – or
+not</h2>
+<p>A serious problem with traditional web-based applications is the
+way in which they abuse HTML. The HTML standard is designed for
+display of hypertext documents—documents containing links to other
+documents. The form-like aspects of HTML have nothing to do with
+hypertext; they exist in the HTML standards merely because they're
+too useful to leave out. Web-based applications try to make HTML
+pages look more like a paper form than like a hypertext document.
+This is a perversion of HTML's original purpose.</p>
+<p><br/>
+<br/>
+
+</p>
+<p style="page-break-before: always">XUL is a language for expressing
+forms away from the hypertext environment. Stripped of the underlying
+hypertext requirement, XUL is able to offer more flexible
+form-construction options, as well as everything that HTML offers the
+form builder. This table shows that XUL can do everything that HTML's
+form and menu tags can do:</p>
+<h4 class="western">Simple HTML and XUL Tags Compared</h4>
+<table cellpadding="2" cellspacing="2">
+	<tr valign="top">
+		<th style="border-top: 1.50pt double #808080; border-bottom: 1px double #808080; border-left: 1.50pt double #808080; border-right: none; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in">
+			<p><font size="2" style="font-size: 10pt"><b>HTML Tag</b></font></p>
+		</th>
+		<th style="border-top: 1.50pt double #808080; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1.50pt double #808080; padding: 0.02in">
+			<p><font size="2" style="font-size: 10pt"><b>XUL Tag</b></font></p>
+		</th>
+	</tr>
+	<tr valign="top">
+		<td width="234" style="border-top: none; border-bottom: 1px double #808080; border-left: 1.50pt double #808080; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;BUTTON&gt;</font></tt></p>
+		</td>
+		<td width="243" style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1.50pt double #808080; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;button&gt;</font></tt></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="234" style="border-top: none; border-bottom: 1px double #808080; border-left: 1.50pt double #808080; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;INPUT
+			TYPE=&quot;button&quot;&gt;</font></tt></p>
+		</td>
+		<td width="243" style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1.50pt double #808080; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;button&gt;</font></tt></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="234" style="border-top: none; border-bottom: 1px double #808080; border-left: 1.50pt double #808080; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;INPUT
+			TYPE=&quot;text&quot;&gt;</font></tt></p>
+		</td>
+		<td width="243" style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1.50pt double #808080; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;textbox&gt;</font></tt></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="234" style="border-top: none; border-bottom: 1px double #808080; border-left: 1.50pt double #808080; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;INPUT
+			TYPE=&quot;radio&quot;&gt;</font></tt></p>
+		</td>
+		<td width="243" style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1.50pt double #808080; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;radio&gt;</font></tt></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="234" style="border-top: none; border-bottom: 1px double #808080; border-left: 1.50pt double #808080; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;INPUT
+			TYPE=&quot;checkbox&quot;&gt;</font></tt></p>
+		</td>
+		<td width="243" style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1.50pt double #808080; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;checkbox&gt;</font></tt></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="234" style="border-top: none; border-bottom: 1px double #808080; border-left: 1.50pt double #808080; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;INPUT
+			TYPE=&quot;password&quot;&gt;</font></tt></p>
+		</td>
+		<td width="243" style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1.50pt double #808080; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;textbox
+			type=&quot;password&quot;&gt;</font></tt></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="234" style="border-top: none; border-bottom: 1px double #808080; border-left: 1.50pt double #808080; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;INPUT
+			TYPE=&quot;image&quot;&gt;</font></tt></p>
+		</td>
+		<td width="243" style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1.50pt double #808080; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;image&gt;</font></tt>
+			<font size="2" style="font-size: 10pt">or </font><tt class="western"><font size="2" style="font-size: 10pt">&lt;button&gt;</font></tt></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="234" style="border-top: none; border-bottom: 1px double #808080; border-left: 1.50pt double #808080; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;SELECT&gt;</font></tt></p>
+		</td>
+		<td width="243" style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1.50pt double #808080; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;menulist&gt;</font></tt>
+			<font size="2" style="font-size: 10pt">or </font><tt class="western"><font size="2" style="font-size: 10pt">&lt;listbox&gt;</font></tt></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="234" style="border-top: none; border-bottom: 1px double #808080; border-left: 1.50pt double #808080; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;OPTGROUP&gt;</font></tt></p>
+		</td>
+		<td width="243" style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1.50pt double #808080; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;menuseparator&gt;</font></tt></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="234" style="border-top: none; border-bottom: 1px double #808080; border-left: 1.50pt double #808080; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;OPTION&gt;</font></tt></p>
+		</td>
+		<td width="243" style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1.50pt double #808080; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;menuitem&gt;</font></tt></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="234" style="border-top: none; border-bottom: 1px double #808080; border-left: 1.50pt double #808080; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;TEXTAREA&gt;</font></tt></p>
+		</td>
+		<td width="243" style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1.50pt double #808080; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;textbox
+			multiline=&quot;true&quot;&gt;</font></tt></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="234" style="border-top: none; border-bottom: 1px double #808080; border-left: 1.50pt double #808080; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;LABEL&gt;</font></tt></p>
+		</td>
+		<td width="243" style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1.50pt double #808080; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;label&gt;</font></tt></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="234" style="border-top: none; border-bottom: 1px double #808080; border-left: 1.50pt double #808080; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;FIELDSET&gt;</font></tt></p>
+		</td>
+		<td width="243" style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1.50pt double #808080; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;groupbox&gt;</font></tt></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="234" style="border-top: none; border-bottom: 1px double #808080; border-left: 1.50pt double #808080; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;LEGEND&gt;</font></tt></p>
+		</td>
+		<td width="243" style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1.50pt double #808080; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;caption&gt;</font></tt></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="234" style="border-top: none; border-bottom: 1.50pt double #808080; border-left: 1.50pt double #808080; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;INPUT
+			TYPE=&quot;radio&quot; NAME=&gt;</font></tt></p>
+		</td>
+		<td width="243" style="border-top: none; border-bottom: 1.50pt double #808080; border-left: 1px double #808080; border-right: 1.50pt double #808080; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in">
+			<p><tt class="western"><font size="2" style="font-size: 10pt">&lt;radiogroup&gt;</font></tt></p>
+		</td>
+	</tr>
+</table>
+<p><br/>
+<br/>
+
+</p>
+<p>XUL doesn't have a <tt class="western">&lt;FORM&gt;</tt> tag
+because XUL is explicitly <i>about</i> forms. It doesn't have a
+Submit button because form operations are run from JavaScript. Such
+operations don't usually have the security restrictions that HTML
+forms have.</p>
+<p>XUL also has some very sophisticated form-like tags. <tt class="western">&lt;listbox&gt;</tt>
+and <tt class="western">&lt;tree&gt;</tt> are more powerful than
+anything HTML has to offer. <tt class="western">&lt;listbox&gt;</tt>
+is a more flexible version of <tt class="western">&lt;SELECT&gt;</tt>.
+<tt class="western">&lt;tree&gt;</tt> implements a user-navigable
+tree structure, like that of Microsoft's Windows Explorer or the
+Macintosh Finder. One of these trees appears in the Bookmark Manager
+screenshot above (Figure 3).</p>
+<p>In HTML, tags like <tt class="western">&lt;P&gt;</tt>, <tt class="western">&lt;IMG&gt;</tt>,
+and <tt class="western">&lt;A&gt;</tt> are the central concepts; form
+tags are secondary. In XUL, these roles are reversed. The <tt class="western">&lt;button&gt;</tt>
+tag is central to XUL; the <tt class="western">&lt;description&gt;</tt>
+and <tt class="western">&lt;image&gt;</tt> tags (equivalent to <tt class="western">&lt;P&gt;</tt>
+and <tt class="western">&lt;IMG&gt;</tt>, respectively) are very much
+secondary. XUL is not very useful for displaying long streams of
+text, although it can get by. It's better at constructing highly
+interactive data-entry interfaces.</p>
+<p>The most fundamental tags in HTML's layout system are <tt class="western">&lt;DIV&gt;</tt>
+and <tt class="western">&lt;SPAN&gt;</tt>. XUL has a fundamental tag
+that's equivalent: <tt class="western">&lt;box&gt;</tt>. <tt class="western">&lt;box&gt;</tt>
+has <tt class="western">&lt;vbox&gt;</tt> and <tt class="western">&lt;hbox&gt;</tt>
+variants. These tags control how content is laid out, just as their
+HTML equivalents do. Where a line of HTML text will be wrapped to fit
+an existing window's dimensions, an XUL document will sometimes force
+a new window to a suitable size. So there are some points of
+difference between HTML and XUL layout.</p>
+<p>Just like XHTML-based applications, XUL applications are part of a
+multi-technology environment. The features of CSS2, JavaScript, and
+the DOM standards are all available to a XUL programmer. Some
+standards components aren't there, such as the HTML part of the DOM 1
+standard, because it's XUL and not XHTML. In general terms, however,
+the environment is the same. This kind of XHTML code:</p>
+<pre class="western" style="margin-bottom: 0.2in">&lt;input type=&quot;button&quot; style=&quot;font-size:large&quot; onclick=&quot;alert('Hi')&quot;&gt;Press Me&lt;/input&gt;</pre><p>
+works just as well when used in XUL:</p>
+<pre class="western" style="margin-bottom: 0.2in">&lt;button style=&quot;font-size:large&quot; onclick =&quot;alert('Hi')&quot;&gt;Press Me&lt;/button&gt;</pre><p>
+This flexible environment, plus XUL's emphasis on &quot;forms first,
+text second,&quot; means that it's easy to create XUL documents that
+are laid out and aligned in a bulletproof way. This process is made
+especially easy by XUL's <tt class="western">&lt;spacer&gt;</tt> tag
+and its <tt class="western">flex</tt> attribute. These features act
+like the placement features of a GUI design tool. No one-pixel GIFs,
+graphic designers, or other nasties are required. Add a CSS2
+stylesheet (called a <i>theme</i> or <i>skin</i> in XUL) if you want
+extra control over appearances.</p>
+<h2 class="western">XUL GUI Construction Goes Beyond Forms</h2>
+<p>If XUL was just form scripts and styles, you might as well stick
+with HTML. But XUL is more than forms; it's a whole supermarket shelf
+of GUI tricks. Here's a shopping cart of GUI widgets to sample from:</p>
+<ul>
+	<li/>
+<p>To put GUI elements on top of each other, use <br/>
+a
+	<tt class="western">&lt;stack&gt;</tt>, a <tt class="western">&lt;deck&gt;</tt>,
+	a <tt class="western">&lt;bulletinboard&gt;</tt>, a <tt class="western">&lt;tabbox&gt;</tt>,
+	or a <tt class="western">&lt;wizard&gt;</tt>.</p>
+	<li/>
+<p>If you don't like the standard button provided by <tt class="western">&lt;button&gt;</tt>,
+	use the <tt class="western">type</tt> attribute to vary it a number
+	of ways, or use any of these other button-like tags:
+	<br/>
+<tt class="western">&lt;toolbarbutton&gt;</tt>,
+	<tt class="western">&lt;autorepeatbutton&gt;</tt>,
+	<tt class="western">&lt;scrollbarbutton&gt;</tt>, <tt class="western">&lt;grippy&gt;</tt>,
+	<tt class="western">&lt;toolbargrippy&gt;</tt>, <tt class="western">&lt;resizer&gt;</tt>.</p>
+	<li/>
+<p>To add support for a keystroke, use the <tt class="western">&lt;key&gt;</tt>
+	tag or the <tt class="western">&lt;command&gt;</tt> tag.</p>
+	<li/>
+<p>To work with menus, try <tt class="western">&lt;menu&gt;</tt>,
+	<tt class="western">&lt;menulist&gt;</tt>, <tt class="western">&lt;menupopup&gt;</tt>,
+	or <tt class="western">&lt;menubar&gt;</tt>.</p>
+	<li/>
+<p>To add scrolling, use the CSS <tt class="western">overflow</tt>
+	property, or the <br/>
+XUL <tt class="western">&lt;scrollbox&gt;</tt>,
+	<tt class="western">&lt;arrowscrollbox&gt;</tt>, or <tt class="western">&lt;scrollbar&gt;</tt>
+	tag.</p>
+	<li/>
+<p>Toolbars and menu bars can be added to a window using the
+	<br/>
+<tt class="western">&lt;toolbox&gt;</tt>, <tt class="western">&lt;toolbar&gt;</tt>,
+	<tt class="western">&lt;menubar&gt;</tt>, and <tt class="western">&lt;statusbar&gt;</tt>
+	tags as starting points for any other tag.</p>
+	<li/>
+<p>XUL even has <tt class="western">&lt;colorpicker&gt;</tt>
+	and <tt class="western">&lt;progressmeter&gt;</tt> tags.</p>
+</ul>
+<p>XUL's power widgets, <tt class="western">&lt;listbox&gt;</tt> and
+<tt class="western">&lt;tree&gt;</tt>, are constructed from a
+collection of their own tags, which add extra flexibility to the
+language. These tags are similar to HTML's <tt class="western">&lt;TABLE&gt;</tt>
+tag, although the <tt class="western">&lt;UL&gt;</tt>/<tt class="western">&lt;OL&gt;</tt>
+features of HTML are also similar. <tt class="western">&lt;listbox&gt;</tt>
+has subtags such as <tt class="western">&lt;listitem&gt;</tt> and
+<tt class="western">&lt;listcell&gt;</tt>; <tt class="western">&lt;tree&gt;</tt>
+has subtags such as <tt class="western">&lt;treechildren&gt;</tt> and
+<tt class="western">&lt;treecols&gt;</tt>.</p>
+<p>HTML uses the <tt class="western">&lt;FRAMESET&gt;</tt>, <tt class="western">&lt;FRAME&gt;</tt>,
+and <tt class="western">&lt;IFRAME&gt;</tt> tags to provide
+multi-document display. XUL has an equivalent variety of tags, drawn
+from the list <tt class="western">&lt;iframe&gt;</tt>, <tt class="western">&lt;page&gt;</tt>,
+<tt class="western">&lt;editor&gt;</tt>, <tt class="western">&lt;browser&gt;</tt>,
+and <tt class="western">&lt;tabbrowser&gt;</tt>. A XUL window can be
+specially decorated if it's identified as a XUL <tt class="western">&lt;dialog&gt;</tt>-based
+or <tt class="western">&lt;wizard&gt;</tt>-based document instead of
+a <tt class="western">&lt;window&gt;</tt>-based document.</p>
+<p>All in all, there's a fair range (LOL!) of tags to choose from —
+more than enough for most application windows and dialog boxes. If
+anything's missing – which it does - a complementary technology
+called XBL <a href="http://www.mozilla.org/catalog/architecture/xbl/" target="new">Extensible
+Bindings Language</a> (XBL) can be used to add extra widgets (extra
+tags) to the XUL language.</p>
+<h2 class="western">The Template Factor</h2>
+<p>XUL has one further trick up its sleeve: the <tt class="western">&lt;template&gt;</tt>
+tag and its subsidiary tags. The <tt class="western">&lt;template&gt;</tt>
+tag allows an XUL document's content to be determined in a
+data-driven way. In HTML or XHTML, this can only be done by
+server-side generation of the document, or by rather messy Dynamic
+HTML techniques. In XUL, the <tt class="western">&lt;template&gt;</tt>
+tag allows a piece of XUL content to be repeated uniquely for each
+data item that matches the template. In the Mozilla browser, for
+example, the bookmarks displayed on the Personal Toolbar are
+generated by a single XUL template. If more bookmarks are added, more
+items appear on that toolbar.</p>
+<p>This templating system is rather like a simple report-writing
+language, but with one difference: The generated content can change
+dynamically. If a bookmark disappears, the content that was generated
+to represent it disappears as well. This makes the template system
+somewhat automated, and it can adjust due to user input or
+information received from other sources, such as from across the
+Internet.</p>
+<p>This dynamic behavior is a whole level more sophisticated than
+modern web page display. A modern browser displays whatever bits it
+has of a loading web page, before the page is completely delivered.
+We're now accustomed to seeing missing chunks of a page fill in after
+the content that surrounds them is in place, especially if that
+missing chunk is an image. In that case, all is quiet once the web
+page is fully loaded. With a XUL template, however, the page might
+change even <i>after</i> its document is fully loaded. This is the
+template at work. In ordinary HTML, this can only be done using
+bolted-on Dynamic HTML. In XUL, the <tt class="western">&lt;template&gt;</tt>
+tag is a fundamental part of the XUL language.</p>
+<h2 class="western">Over the XUL Rainbow</h2>
+<p>XUL is the most accessible part of the Mozilla GUI-building
+technology (bull: it is outdated due to low quality), but it's only
+the tip of the iceberg. Whereas XUL displays the widgets that make up
+an application's GUI, other parts of Mozilla are responsible for
+turning user input to that GUI into concrete actions. These
+technologies work in concert with XUL.</p>
+<p><br/>
+<br/>
+
+</p>
+<p style="page-break-before: always">The Mozilla platform implements
+a small database system (actually a knowledge system (I call bull on
+this statement)) that relies on the W3C's RDF standard. The RDF
+databases (actually fact stores) provide data for the XUL templating
+system, and those databases can be driven directly from JavaScript,
+if that's required.<br/>
+<br/>
+A second obsolete technology is
+Mozilla's 
+</p>
+<ul>
+	<li/>
+<p>Application Object Model (AOM). Like the 
+	</p>
+	<li/>
+<p>Document Object Model (DOM) or 
+	</p>
+	<li/>
+<p>Browser Object Model (BOM) <br/>
+<br/>
+<br/>
+of a loaded
+	XHTML document, the AOM provides handy objects that are used to
+	implement the commands and actions that lie behind the controls
+	provided in a XUL GUI. These commands can be custom-written in
+	JavaScript, or they can be pre-supplied by the platform.</p>
+</ul>
+<p>Finally, the Mozilla platform supports a number of other stupid
+“technologies” accessible from JavaScript (ECMA-script). These
+technologies poke up high enough that a JavaScript script can exploit
+them if suitable arrangements can be made. Greatest (LOL) of these
+technologies is <b>XPCOM</b>, a component system that provides more
+than a thousand application objects for the programmer to work with —
+a very rich development environment. Other equally powerful
+technologies are overlays (covered in my next article), <b>XBL</b>,
+and <b>XPInstall</b>. <i>XP</i> stands for <i>cross-platform</i>, and
+that's Mozilla's strength. For a jumping-off point for all these
+confusing technologies, see <a href="http://www.mozilla.org/catalog/architecture/" target="new">Core
+Architecture</a> on the Mozilla site, which keeps on blabbering
+endlessly until you fell asleep and learned nothing at all.</p>
+<h2 class="western">Conclusion</h2>
+<p>100% bull: The ease of expression, portability, and clean design
+of XUL makes it an attractive and efficient development option for
+traditional GUI-based applications. Although XUL use is restricted to
+products based on the Mozilla platform, its GUI focus, portability,
+Internet readiness, and powerful supporting features make it the best
+open source application development tool yet invented- LOL what utter
+bull. Best of all, if you have a Mozilla-based product installed, XUL
+is available on your computer immediately, and will break right away.
+You also have text file capability available, by the way, which is
+far superior to all XUL bs.</p>
+</body>
+</html>
