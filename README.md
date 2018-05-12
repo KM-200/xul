@@ -1,4 +1,4 @@
-pls install  https://github.com/jvillalobos/Remote-XUL-Manager
+In order to use XUL in a recent FireFox, please install  https://github.com/jvillalobos/Remote-XUL-Manager
 
 from   https://addons.mozilla.org/en-US/android/addon/remote-xul-manager/
 
