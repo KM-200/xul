@@ -4,6 +4,7 @@ from   https://addons.mozilla.org/en-US/android/addon/remote-xul-manager/
 
 and enable  https://km-200.github.io/   (don't be bothered by the error message, OK.) to display XUL  in FireFox ESR (or seamonkey, pale moon or waterfox or other REAL browsers instead of the limited nightly "FFox") 
 
+     NOW:
 test right here :  https://km-200.github.io/xul/index.xul - you will get an error message typically unless you have the add-on !
 so there is no need to "inform us about it..." , understood?
 
