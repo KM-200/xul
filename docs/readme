@@ -5,6 +5,8 @@ intro to XUL:             http://books.mozdev.org/html/mozilla-chp-2.html
 intro to XUL:             https://km-200.github.io/xul/2/xul.html
 overview:                 https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL
 
+reload the page to reset the XUL content.
+
 find snippets here : https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/Tutorial/Adding_Event_Handlers
 
 example : https://km-200.github.io/xul/2/findfile_events.xul
